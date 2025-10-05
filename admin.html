@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Pendaftar - Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; }
+    h1 { text-align: center; color: #333; }
+    table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background: #007bff; color: white; }
+    .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; border-radius: 5px; text-decoration: none; }
+    .btn:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Data Pendaftar Mahasiswa Baru</h1>
+  <table id="tabelPendaftar">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Tanggal Lahir</th>
+        <th>Jenis Kelamin</th>
+        <th>Sekolah Asal</th>
+        <th>Program Studi 1</th>
+        <th>Program Studi 2</th>
+        <th>Email</th>
+        <th>Telepon</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <a href="login.html" class="btn">← Kembali ke Login</a>
+
+  <script>
+    // Ambil data dari localStorage
+    const data = JSON.parse(localStorage.getItem('dataPendaftar')) || [];
+    const tbody = document.querySelector('#tabelPendaftar tbody');
+
+    if (data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;">Belum ada data pendaftar</td></tr>`;
+    } else {
+      data.forEach((item, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item.nama}</td>
+            <td>${item.ttl}</td>
+            <td>${item.jk}</td>
+            <td>${item.sekolah}</td>
+            <td>${item.prodi1}</td>
+            <td>${item.prodi2 || '-'}</td>
+            <td>${item.email}</td>
+            <td>${item.telepon}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulir Pendaftaran Mahasiswa Baru</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background: #007bff; }
+    .container { max-width: 800px; margin: 30px auto; background: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+    h1 { text-align: center; color: #333; }
+    h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+    button { background: #007bff; color: #eceff2  ; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Formulir Pendaftaran Mahasiswa Baru</h1>
+    <form id="formPendaftaran">
+      <h2>1. Identitas Diri</h2>
+      <label>Nama Lengkap</label><input type="text" id="nama" required>
+      <label>Tempat & Tanggal Lahir</label><input type="text" id="ttl" required>
+      <label>Jenis Kelamin</label>
+      <select id="jk" required>
+        <option>-- Pilih --</option>
+        <option>Laki-laki</option>
+        <option>Perempuan</option>
+      </select>
+      <label>Agama</label><input type="text" id="agama" required>
+      <label>Kewarganegaraan</label><input type="text" id="kewarganegaraan" required>
+      <label>NIK</label><input type="text" id="nik" required>
+      <label>Alamat Lengkap</label><textarea id="alamat" required></textarea>
+      <label>Nomor Telepon/HP</label><input type="text" id="telepon" required>
+      <label>Email</label><input type="email" id="email" required>
+
+      <h2>2. Data Keluarga</h2>
+      <label>Nama Orang Tua/Wali</label><input type="text" id="ortu" required>
+      <label>Pekerjaan Orang Tua</label><input type="text" id="pekerjaan" required>
+      <label>Pendidikan Orang Tua</label><input type="text" id="pendidikan" required>
+      <label>Penghasilan Orang Tua</label><input type="text" id="penghasilan" required>
+      <label>Alamat Orang Tua/Wali</label><textarea id="alamat_ortu" required></textarea>
+      <label>Nomor Telepon Orang Tua/Wali</label><input type="text" id="telepon_ortu" required>
+
+      <h2>3. Riwayat Pendidikan</h2>
+      <label>Nama Sekolah Asal</label><input type="text" id="sekolah" required>
+      <label>Jurusan</label><input type="text" id="jurusan" required>
+      <label>Tahun Lulus</label><input type="text" id="tahun" required>
+
+      <h2>4. Program Studi</h2>
+      <label>Pilihan Program Studi 1</label><input type="text" id="prodi1" required>
+      <label>Pilihan Program Studi 2</label><input type="text" id="prodi2">
+
+      <button type="submit">Kirim Pendaftaran</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('formPendaftaran').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Ambil semua data utama
+      const data = {
+        nama: document.getElementById('nama').value,
+        ttl: document.getElementById('ttl').value,
+        jk: document.getElementById('jk').value,
+        agama: document.getElementById('agama').value,
+        nik: document.getElementById('nik').value,
+        telepon: document.getElementById('telepon').value,
+        email: document.getElementById('email').value,
+        sekolah: document.getElementById('sekolah').value,
+        jurusan: document.getElementById('jurusan').value,
+        tahun: document.getElementById('tahun').value,
+        prodi1: document.getElementById('prodi1').value,
+        prodi2: document.getElementById('prodi2').value
+      };
+
+      // Ambil data lama dari localStorage
+      let pendaftar = JSON.parse(localStorage.getItem('dataPendaftar')) || [];
+
+      // Tambahkan data baru
+      pendaftar.push(data);
+
+      // Simpan kembali ke localStorage
+      localStorage.setItem('dataPendaftar', JSON.stringify(pendaftar));
+
+      // Pindah ke halaman sukses
+      window.location.href = 'sukses.html';
+    });
+  </script>
+</body>
+</html>

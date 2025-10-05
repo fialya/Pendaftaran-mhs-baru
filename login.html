@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Admin</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background: #007bff; }
+    .login-container {
+      background: #fff;
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    h2 { text-align: center; margin-bottom: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #007bff; border-radius: 5px; }
+    .btn {
+      width: 100%;
+      margin-top: 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover { background: #0056b3; }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login Admin</h2>
+    <form onsubmit="return login()">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Masukkan username" required>
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Masukkan password" required>
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <!-- Tombol kembali ke dashboard -->
+    <a href="index.html" class="back-link">← Kembali ke Dashboard</a>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      // Login sederhana
+      if (user === 'admin' && pass === '12345') {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'admin.html';
+      } else {
+        alert('Username atau password salah!');
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
